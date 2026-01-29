@@ -1,6 +1,7 @@
 module com.example.tidsrejseagenturet {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.tidsrejseagenturet to javafx.fxml;

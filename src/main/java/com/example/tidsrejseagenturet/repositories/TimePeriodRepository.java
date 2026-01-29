@@ -1,7 +1,6 @@
 package com.example.tidsrejseagenturet.repositories;
 
-import com.example.tidsrejseagenturet.TimeMachine;
-import com.example.tidsrejseagenturet.TimePeriod;
+import com.example.tidsrejseagenturet.models.TimePeriod;
 import com.example.tidsrejseagenturet.config.DatabaseConfig;
 
 import java.sql.*;

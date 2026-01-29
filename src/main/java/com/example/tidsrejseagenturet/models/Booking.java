@@ -1,4 +1,4 @@
-package com.example.tidsrejseagenturet;
+package com.example.tidsrejseagenturet.models;
 
 public class Booking {
     private int id;

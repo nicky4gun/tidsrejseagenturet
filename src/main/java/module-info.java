@@ -7,4 +7,8 @@ module com.example.tidsrejseagenturet {
 
     opens com.example.tidsrejseagenturet to javafx.fxml;
     exports com.example.tidsrejseagenturet;
+    exports com.example.tidsrejseagenturet.controllers;
+    opens com.example.tidsrejseagenturet.controllers to javafx.fxml;
+    exports com.example.tidsrejseagenturet.models;
+    opens com.example.tidsrejseagenturet.models to javafx.fxml;
 }

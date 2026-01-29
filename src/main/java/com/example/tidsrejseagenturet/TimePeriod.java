@@ -10,22 +10,31 @@ public class TimePeriod {
         this.timePeriode = timePeriode;
         this.Description = Description;
     }
+
     public TimePeriod(String timePeriode, String Description) {
         this.timePeriode = timePeriode;
         this.Description = Description;
     }
+
     public int getId() {
         return id;
     }
+
     public String getTimePeriode() {
         return timePeriode;
     }
+
     public String getDescription() {
         return Description;
     }
-public void setTimePeriode(String timePeriode){this.timePeriode = timePeriode;}
 
-    public void setDescription(String Description){this.Description = Description;}
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTimePeriode(String timePeriode) {this.timePeriode = timePeriode;}
+
+    public void setDescription(String Description) {this.Description = Description;}
 
     @Override
     public String toString() {

@@ -5,10 +5,10 @@ public class Customer {
     private String customerName;
     private String customerEmail;
 
-    public Customer(String customerName, String customerEmail, int customerId) {
+    public Customer(int customerId, String customerName, String customerEmail) {
+        this.customerId = customerId;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
-        this.customerId = customerId;
     }
     public Customer(String name, String email){
         this.customerName = name;
@@ -18,16 +18,16 @@ public class Customer {
     public String getCustomerName() {
         return customerName;
     }
+
     public String getCustomerEmail() {
         return customerEmail;
     }
+
     public int getCustomerId() {
         return customerId;
     }
 
-
-
-
-
-
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 }

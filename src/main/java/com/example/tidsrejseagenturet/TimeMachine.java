@@ -18,21 +18,29 @@ public class TimeMachine {
         this.capacity = capacity;
         this.id = id;
     }
+
     public int getId() {
         return id;
     }
+
     public String getTimeMachineName() {
         return timeMachineName;
     }
+
     public int getCapacity() {
         return capacity;
     }
-    public boolean isStatus() {
+
+    public boolean getStatus() {
         return status;
     }
+
     public void setStatus(boolean status) { this.status = status; }
+
     public void setCapacity(int capacity) { this.capacity = capacity; }
+
     public void setId(int id) { this.id = id; }
+
     public void setTimeMachineName(String timeMachineName) { this.timeMachineName = timeMachineName; }
 
     @Override

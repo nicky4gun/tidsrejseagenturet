@@ -34,4 +34,8 @@ public class Booking {
     public int getGuideId() {
         return guideId;
     }
+
+    public  void setId(int id) {
+        this.id = id;
+    }
 }

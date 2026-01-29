@@ -62,14 +62,14 @@ public class TimePeriodRepository {
         return timePeriods;
     }
 
-    public void updateTimePeriod(int id, String name, Stirng description) {
+    public void updateTimePeriod(int id, String name, String description) {
         String sql = "UPDATE time_periods SET name = ?, description = ? WHERE id = ?";
 
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, name);
-            stmt.setInt(2, description);
+            stmt.setString(2, description);
             stmt.setInt(3, id);
             stmt.executeUpdate();
 

@@ -21,26 +21,28 @@ public class BookingRepository {
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, customer.getCustomerId());
-            stmt.setString(2, customer.getCustomerName());
-            stmt.setString(3, customer.getCustomerEmail());
+            stmt.setInt(1, booking.getId());
+            stmt.setInt(2, booking.getCustomerId());
+            stmt.setInt(3, booking.getTimeMachineId());
+            stmt.setInt(4, booking.getTimePeriodId());
+            stmt.setInt(5, booking.getGuideId());
             stmt.executeUpdate();
 
             ResultSet keys = stmt.getGeneratedKeys();
 
             if (keys.next()) {
                 int id = keys.getInt(1);
-                customer.setCustomerId(id);
+                booking.setId(id);
             }
 
         } catch (SQLException e) {
-            throw new  RuntimeException("Failed to add new customer", e);
+            throw new  RuntimeException("Failed to add new booking", e);
         }
     }
 
-    public List<Customer> readAllCustomers() {
-        List<Customer> customers = new ArrayList<>();
-        String sql = "SELECT id, name, email FROM customers";
+    public List<Booking> readAllBookings() {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT id, customer_id, time_machine_id, time_period_id, guide_id FROM bookings";
 
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -48,38 +50,42 @@ public class BookingRepository {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String email = rs.getString("email");
+                int customerId = rs.getInt("customer_id");
+                int timeMachineId = rs.getInt("time_machine_id");
+                int timePeriodId = rs.getInt("time_period_id");
+                int guideId = rs.getInt("guide_id");
 
-                Customer customer = new Customer(id, name, email);
-                customers.add(customer);
+                Booking booking = new Booking(id, customerId, timeMachineId, timePeriodId, guideId);
+                bookings.add(booking);
             }
 
         } catch (SQLException e) {
-            throw new  RuntimeException("Failed to read all customers", e);
+            throw new  RuntimeException("Failed to read all bookings", e);
         }
 
-        return customers;
+        return bookings;
     }
 
-    public void updateCustomer(int id, String name, String email) {
-        String sql = "UPDATE customers SET name = ?, email = ? WHERE id = ?";
+    public void updateBooking(int id, int customerId, int timeMachineId, int timePeriodId, int guideId) {
+        String sql = "UPDATE customers SET customer_id = ?, time_machine_id = ?, time_period_id = ?, guide_id = ? WHERE id = ?";
 
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, name);
-            stmt.setString(2, email);
-            stmt.setInt(3, id);
+            stmt.setInt(1, customerId);
+            stmt.setInt(2, timeMachineId);
+            stmt.setInt(3, timePeriodId);
+            stmt.setInt(4, guideId);
+            stmt.setInt(5, id);
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Failed to update customer", e);
+            throw new RuntimeException("Failed to update booking", e);
         }
     }
 
-    public void deleteCustomer(int id) {
-        String sql = "DELETE FROM customers WHERE id = ?";
+    public void deleteBooking(int id) {
+        String sql = "DELETE FROM bookings WHERE id = ?";
 
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -88,7 +94,7 @@ public class BookingRepository {
             stmt.executeUpdate();
 
         } catch (Exception e) {
-            throw new RuntimeException("Failed to delete customer", e);
+            throw new RuntimeException("Failed to delete booking", e);
         }
     }
 }

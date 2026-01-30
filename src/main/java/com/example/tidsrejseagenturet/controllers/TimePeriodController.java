@@ -1,6 +1,6 @@
 package com.example.tidsrejseagenturet.controllers;
 
-import com.example.tidsrejseagenturet.Service.TimePeriodService;
+import com.example.tidsrejseagenturet.service.TimePeriodService;
 import com.example.tidsrejseagenturet.models.TimePeriod;
 import com.example.tidsrejseagenturet.config.DatabaseConfig;
 import com.example.tidsrejseagenturet.repositories.TimePeriodRepository;

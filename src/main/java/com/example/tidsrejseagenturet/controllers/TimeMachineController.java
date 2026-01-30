@@ -1,6 +1,6 @@
 package com.example.tidsrejseagenturet.controllers;
 
-import com.example.tidsrejseagenturet.Service.TimeMachineService;
+import com.example.tidsrejseagenturet.service.TimeMachineService;
 import com.example.tidsrejseagenturet.models.TimeMachine;
 import com.example.tidsrejseagenturet.config.DatabaseConfig;
 import com.example.tidsrejseagenturet.repositories.TimeMachineRepository;

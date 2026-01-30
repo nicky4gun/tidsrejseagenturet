@@ -1,4 +1,4 @@
-package com.example.tidsrejseagenturet.Service;
+package com.example.tidsrejseagenturet.service;
 
 import com.example.tidsrejseagenturet.models.TimePeriod;
 import com.example.tidsrejseagenturet.repositories.TimePeriodRepository;

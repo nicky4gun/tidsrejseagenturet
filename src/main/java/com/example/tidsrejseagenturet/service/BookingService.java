@@ -1,4 +1,4 @@
-package com.example.tidsrejseagenturet.Service;
+package com.example.tidsrejseagenturet.service;
 
 import com.example.tidsrejseagenturet.models.*;
 import com.example.tidsrejseagenturet.repositories.*;

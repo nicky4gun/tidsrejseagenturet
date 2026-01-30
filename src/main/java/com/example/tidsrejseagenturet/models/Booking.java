@@ -2,13 +2,20 @@ package com.example.tidsrejseagenturet.models;
 
 public class Booking {
     private int id;
-    private int customerId;
-    private int timeMachineId;
-    private int timePeriodId;
-    private int guideId;
+    private final int customerId;
+    private final int timeMachineId;
+    private final int timePeriodId;
+    private final int guideId;
 
     public Booking (int id, int customerId, int timeMachineId, int timePeriodId, int guideId) {
         this.id = id;
+        this.customerId = customerId;
+        this.timeMachineId = timeMachineId;
+        this.timePeriodId = timePeriodId;
+        this.guideId = guideId;
+    }
+
+    public Booking (int customerId, int timeMachineId, int timePeriodId, int guideId) {
         this.customerId = customerId;
         this.timeMachineId = timeMachineId;
         this.timePeriodId = timePeriodId;
@@ -37,5 +44,10 @@ public class Booking {
 
     public  void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return id + ", Customer: " + customerId + ", TimeMachine: " + timeMachineId + ", TimePeriod: " + timePeriodId + ", Guide: " + guideId;
     }
 }

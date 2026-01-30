@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingRepository {
-    private DatabaseConfig config;
+    private final DatabaseConfig config;
 
     public BookingRepository(DatabaseConfig config) {
         this.config = config;

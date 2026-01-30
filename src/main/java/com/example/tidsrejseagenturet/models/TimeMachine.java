@@ -13,10 +13,11 @@ public class TimeMachine {
         this.status = status;
 
     }
-    public TimeMachine(String timeMachineName, int capacity, int id) {
+
+    public TimeMachine(String timeMachineName, int capacity, boolean status) {
         this.timeMachineName = timeMachineName;
         this.capacity = capacity;
-        this.id = id;
+        this.status = status;
     }
 
     public int getId() {
@@ -35,8 +36,6 @@ public class TimeMachine {
         return status;
     }
 
-    public void setStatus(boolean status) { this.status = status; }
-
     public void setCapacity(int capacity) { this.capacity = capacity; }
 
     public void setId(int id) { this.id = id; }
@@ -45,7 +44,7 @@ public class TimeMachine {
 
     @Override
     public String toString() {
-        return timeMachineName + "("+status+")";
+        return timeMachineName + ", Capacity: " + capacity + ", Status" + "(" + status + ")";
     }
 
 }

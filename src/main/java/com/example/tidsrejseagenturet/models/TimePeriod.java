@@ -2,17 +2,12 @@ package com.example.tidsrejseagenturet.models;
 
 public class TimePeriod {
     private int id;
-    private String timePeriode;
-    private String Description;
+    private final String timePeriod;
+    private final String Description;
 
-    public TimePeriod(int id, String timePeriode, String Description) {
+    public TimePeriod(int id, String timePeriod, String Description) {
         this.id = id;
-        this.timePeriode = timePeriode;
-        this.Description = Description;
-    }
-
-    public TimePeriod(String timePeriode, String Description) {
-        this.timePeriode = timePeriode;
+        this.timePeriod = timePeriod;
         this.Description = Description;
     }
 
@@ -21,7 +16,7 @@ public class TimePeriod {
     }
 
     public String getTimePeriode() {
-        return timePeriode;
+        return timePeriod;
     }
 
     public String getDescription() {
@@ -32,13 +27,9 @@ public class TimePeriod {
         this.id = id;
     }
 
-    public void setTimePeriode(String timePeriode) {this.timePeriode = timePeriode;}
-
-    public void setDescription(String Description) {this.Description = Description;}
-
     @Override
     public String toString() {
-        return timePeriode;
+        return timePeriod + ", Description: " + Description;
     }
 
 }

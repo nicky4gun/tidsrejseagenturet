@@ -15,9 +15,11 @@
             <TableColumn fx:id="customerEmailColumn" prefWidth="172.00006103515625" text="email" />
         </columns>
       </TableView>
-      <TextField layoutX="109.0" layoutY="248.0" />
-      <Button fx:id="addButton" layoutX="274.0" layoutY="248.0" mnemonicParsing="false" onAction="#addCustomer" text="Add" />
-      <Button fx:id="removeButton" layoutX="339.0" layoutY="248.0" mnemonicParsing="false" onAction="#removeCustomer" text="Remove" />
-      <Button fx:id="backButton" layoutX="274.0" layoutY="305.0" mnemonicParsing="false" text="Go Back" />
+      <TextField fx:id="nameTextField" layoutX="225.0" layoutY="233.0" promptText="Name" />
+      <Button fx:id="addButton" layoutX="220.0" layoutY="310.0" mnemonicParsing="false" onAction="#addCustomer" text="Add" />
+      <Button fx:id="removeButton" layoutX="342.0" layoutY="310.0" mnemonicParsing="false" onAction="#removeCustomer" text="Remove" />
+      <TextField fx:id="emailTextField" layoutX="225.0" layoutY="269.0" promptText="Email" />
+      <Button fx:id="changeButton" layoutX="149.0" layoutY="256.0" mnemonicParsing="false" onAction="#changeCustomer" text="change" />
+      <Button fx:id="confirmButton" layoutX="409.0" layoutY="256.0" mnemonicParsing="false" onAction="#confirmCustomer" text="confirm" />
    </children>
 </AnchorPane>

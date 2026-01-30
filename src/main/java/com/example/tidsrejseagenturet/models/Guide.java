@@ -3,18 +3,14 @@ package com.example.tidsrejseagenturet.models;
 public class Guide {
     private int id;
     private String guideName;
-    private String Speciality;
+    private String speciality;
 
-    public Guide (int id, String guideName, String Speciality) {
+    public Guide (int id, String guideName, String speciality) {
         this.id = id;
         this.guideName = guideName;
-        this.Speciality = Speciality;
+        this.speciality = speciality;
+    }
 
-    }
-    public Guide (String timeMachineName, String Speciality) {
-        this.guideName = timeMachineName;
-        this.Speciality = Speciality;
-    }
     public int getId() {
         return id;
     }
@@ -28,6 +24,11 @@ public class Guide {
     }
 
     public String getSpeciality() {
-        return Speciality;
+        return speciality;
+    }
+
+    @Override
+    public String toString() {
+        return guideName + ", Specialty: " + speciality;
     }
 }

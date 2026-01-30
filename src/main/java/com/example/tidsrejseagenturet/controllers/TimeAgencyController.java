@@ -1,9 +1,7 @@
 package com.example.tidsrejseagenturet.controllers;
 
 import com.example.tidsrejseagenturet.TimeAgencyApplication;
-import com.example.tidsrejseagenturet.config.DatabaseConfig;
 import com.example.tidsrejseagenturet.repositories.*;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -58,7 +56,7 @@ public class TimeAgencyController {
 
     @FXML
     private void showMachines() throws IOException {
-    loadView("TimeMachne.fxml");
+    loadView("TimeMachine.fxml");
     }
 
     @FXML
@@ -74,10 +72,5 @@ public class TimeAgencyController {
     private void loadView (String fxml) throws IOException {
         Parent view = FXMLLoader.load(TimeAgencyApplication.class.getResource(fxml));
         mainPane.setCenter(view);
-    }
-
-    @FXML
-    private void BackButton() throws IOException {
-        loadView("hellow-View.fxml");
     }
 }

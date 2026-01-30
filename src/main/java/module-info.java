@@ -11,4 +11,6 @@ module com.example.tidsrejseagenturet {
     opens com.example.tidsrejseagenturet.controllers to javafx.fxml;
     exports com.example.tidsrejseagenturet.models;
     opens com.example.tidsrejseagenturet.models to javafx.fxml;
+    exports com.example.tidsrejseagenturet.Service;
+    opens com.example.tidsrejseagenturet.Service to javafx.fxml;
 }

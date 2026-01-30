@@ -1,5 +1,6 @@
 package com.example.tidsrejseagenturet.controllers;
 
+import com.example.tidsrejseagenturet.Service.TimePeriodService;
 import com.example.tidsrejseagenturet.models.TimePeriod;
 import com.example.tidsrejseagenturet.config.DatabaseConfig;
 import com.example.tidsrejseagenturet.repositories.TimePeriodRepository;
@@ -11,6 +12,7 @@ import javafx.scene.control.ListView;
 public class TimePeriodController {
     private final DatabaseConfig config = new DatabaseConfig();
     private final TimePeriodRepository timePeriodRepo = new TimePeriodRepository(config);
+    private final TimePeriodService timePeriodService = new TimePeriodService(timePeriodRepo);
 
     @FXML
     private ListView<TimePeriod> timePeriodsList;
@@ -21,7 +23,7 @@ public class TimePeriodController {
 
     @FXML
     private void connectTimePeriodsList() {
-        ObservableList<TimePeriod> timePeriods = FXCollections.observableArrayList();
+        ObservableList<TimePeriod> timePeriods = FXCollections.observableArrayList(timePeriodService.getAllTimePeriods());
         timePeriodsList.setItems(timePeriods);
     }
 }

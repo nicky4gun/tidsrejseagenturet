@@ -10,6 +10,7 @@ public class Customer {
         this.customerName = customerName;
         this.customerEmail = customerEmail;
     }
+
     public Customer(String name, String email){
         this.customerName = name;
         this.customerEmail = email;
@@ -29,5 +30,18 @@ public class Customer {
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    @Override
+    public String toString() {
+        return customerName;
     }
 }

@@ -3,24 +3,24 @@ package com.example.tidsrejseagenturet.models;
 public class TimePeriod {
     private int id;
     private final String timePeriod;
-    private final String Description;
+    private final String description;
 
-    public TimePeriod(int id, String timePeriod, String Description) {
+    public TimePeriod(int id, String timePeriod, String description) {
         this.id = id;
         this.timePeriod = timePeriod;
-        this.Description = Description;
+        this.description = description;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getTimePeriode() {
+    public String getTimePeriod() {
         return timePeriod;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setId(int id) {
@@ -29,7 +29,7 @@ public class TimePeriod {
 
     @Override
     public String toString() {
-        return timePeriod + ", Description: " + Description;
+        return timePeriod + ", Description: " + description;
     }
 
 }

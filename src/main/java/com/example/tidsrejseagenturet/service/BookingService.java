@@ -21,6 +21,11 @@ public class BookingService {
     }
 
     public Booking addBooking(Customer customer, TimeMachine timeMachine, TimePeriod timePeriod, Guide guide) {
+        if (customer == null) throw new IllegalArgumentException("Customer must be selected");
+        if (timeMachine == null) throw new IllegalArgumentException("TimeMachine must be selected");
+        if (timePeriod == null) throw new IllegalArgumentException("TimePeriod must be selected");
+        if (guide == null) throw new IllegalArgumentException("Guide must be selected");
+
         int customerId = customer.getCustomerId();
         int timeMachineId = timeMachine.getId();
         int timePeriodId = timePeriod.getId();

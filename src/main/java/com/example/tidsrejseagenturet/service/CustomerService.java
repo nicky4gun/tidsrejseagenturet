@@ -34,7 +34,7 @@ public class CustomerService {
     public void removeCustomer(Customer customer) {
         int id = customer.getCustomerId();
 
-        if (id >= 0) {
+        if (id <= 0) {
             throw new IllegalArgumentException("Invalid customer id: " + id + ". Id must be positive!");
         }
 

@@ -2,8 +2,6 @@ package com.example.tidsrejseagenturet.controllers;
 
 import com.example.tidsrejseagenturet.service.CustomerService;
 import com.example.tidsrejseagenturet.models.Customer;
-import com.example.tidsrejseagenturet.config.DatabaseConfig;
-import com.example.tidsrejseagenturet.repositories.CustomerRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,21 +11,24 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CustomerViewController {
-    private final DatabaseConfig config = new DatabaseConfig();
-    private final CustomerRepository customerRepo = new CustomerRepository(config);
-    private final CustomerService service = new CustomerService(customerRepo);
+    private CustomerService customerService;
+
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
+        connectCustomerTable();
+    }
 
     @FXML
     private TableView<Customer> customerTable;
 
     @FXML
-    private TableColumn<Integer, Customer> customerIdColumn;
+    private TableColumn<Customer, Integer> customerIdColumn;
 
     @FXML
-    private TableColumn<String, Customer> customerNameColumn;
+    private TableColumn<Customer, String> customerNameColumn;
 
     @FXML
-    private TableColumn<String, Customer> customerEmailColumn;
+    private TableColumn<Customer, String> customerEmailColumn;
 
     @FXML
     private TextField nameTextField;
@@ -39,13 +40,11 @@ public class CustomerViewController {
 
     private Customer customerBeingEdited;
 
-    public void initialize() {
-        connectCustomerTable();
-    }
+    public void initialize() {}
 
     @FXML
     private void connectCustomerTable() {
-        customers = FXCollections.observableArrayList(service.getAllCustomers());
+        customers = FXCollections.observableArrayList(customerService.getAllCustomers());
         customerTable.setItems(customers);
 
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -59,7 +58,7 @@ public class CustomerViewController {
         String email = emailTextField.getText();
 
         try {
-            Customer customer = service.createCustomer(name, email);
+            Customer customer = customerService.createCustomer(name, email);
             customers.add(customer);
 
             nameTextField.clear();
@@ -78,7 +77,7 @@ public class CustomerViewController {
         try {
             if (selected != null) {
                 customers.remove(selected);
-                service.removeCustomer(selected);
+                customerService.removeCustomer(selected);
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
@@ -106,12 +105,11 @@ public class CustomerViewController {
             customerBeingEdited.setCustomerName(nameTextField.getText());
             customerBeingEdited.setCustomerEmail(emailTextField.getText());
 
-            service.updateCustomer(customerBeingEdited);
+            customerService.updateCustomer(customerBeingEdited);
             customerTable.refresh();
 
             nameTextField.clear();
             emailTextField.clear();
             customerBeingEdited = null;
-
     }
 }

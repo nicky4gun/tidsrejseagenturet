@@ -15,14 +15,13 @@ public class GuideRepository {
     }
 
     public void addGuide(Guide guide) {
-        String sql = "INSERT INTO guides (id, name, specialty) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO guides (name, specialty) VALUES (?, ?)";
 
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, guide.getId());
-            stmt.setString(2, guide.getGuideName());
-            stmt.setString(3, guide.getSpeciality());
+            stmt.setString(1, guide.getGuideName());
+            stmt.setString(2, guide.getSpeciality());
             stmt.executeUpdate();
 
             ResultSet keys = stmt.getGeneratedKeys();

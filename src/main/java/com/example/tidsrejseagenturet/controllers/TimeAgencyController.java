@@ -2,6 +2,10 @@ package com.example.tidsrejseagenturet.controllers;
 
 import com.example.tidsrejseagenturet.TimeAgencyApplication;
 import com.example.tidsrejseagenturet.repositories.*;
+import com.example.tidsrejseagenturet.service.BookingService;
+import com.example.tidsrejseagenturet.service.CustomerService;
+import com.example.tidsrejseagenturet.service.TimeMachineService;
+import com.example.tidsrejseagenturet.service.TimePeriodService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,12 +14,34 @@ import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 
 public class TimeAgencyController {
+    private CustomerService customerService;
+    private TimeMachineService timeMachineService;
+    private TimePeriodService timePeriodService;
+    private BookingService bookingService;
+
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    public void setTimeMachineService(TimeMachineService timeMachineService) {
+        this.timeMachineService = timeMachineService;
+    }
+
+    public void setTimePeriodService(TimePeriodService timePeriodService) {
+        this.timePeriodService = timePeriodService;
+    }
+
+    public void setBookingService(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
+
     @FXML
     protected void onCustomerButtonPress() {
         try {
             showCustomers();
         }catch (IOException e){
             System.out.println("Customer not found");
+            e.printStackTrace();
         }
     }
 
@@ -50,8 +76,8 @@ public class TimeAgencyController {
     private BorderPane mainPane;
 
     @FXML
-        private void showCustomers() throws IOException {
-        loadView("customerView.fxml");
+    private void showCustomers() throws IOException {
+        loadView("CustomerView.fxml");
     }
 
     @FXML
@@ -70,7 +96,22 @@ public class TimeAgencyController {
     }
 
     private void loadView (String fxml) throws IOException {
-        Parent view = FXMLLoader.load(TimeAgencyApplication.class.getResource(fxml));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/tidsrejseagenturet/" + fxml));
+
+        Parent view = loader.load();
+        Object controller = loader.getController();
+
+        // Inject correct service depending on controller type
+        if (controller instanceof CustomerViewController customerController) {
+            customerController.setCustomerService(customerService);
+        } else if (controller instanceof TimeMachineController timeMachineController) {
+            timeMachineController.setTimeMachineService(timeMachineService);
+        } else if (controller instanceof TimePeriodController timePeriodController) {
+            timePeriodController.setTimePeriodService(timePeriodService);
+        } else if (controller instanceof BookingViewController bookingController) {
+            bookingController.setBookingService(bookingService);
+        }
+
         mainPane.setCenter(view);
     }
 }

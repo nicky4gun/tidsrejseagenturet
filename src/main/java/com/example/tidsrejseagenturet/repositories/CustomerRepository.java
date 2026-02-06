@@ -15,14 +15,13 @@ public class CustomerRepository {
     }
 
     public void addCustomer(Customer customer) {
-        String sql = "INSERT INTO customers (id, name, email) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO customers (name, email) VALUES (?, ?)";
 
         try (Connection conn = config.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, customer.getCustomerId());
-            stmt.setString(2, customer.getCustomerName());
-            stmt.setString(3, customer.getCustomerEmail());
+            stmt.setString(1, customer.getCustomerName());
+            stmt.setString(2, customer.getCustomerEmail());
             stmt.executeUpdate();
 
             ResultSet keys = stmt.getGeneratedKeys();

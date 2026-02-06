@@ -15,15 +15,14 @@ public class TimeMachineRepository {
     }
 
     public void addTimeMachine(TimeMachine timeMachine) {
-        String sql = "INSERT INTO time_machines (id, name, capacity, status) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO time_machines (name, capacity, status) VALUES (?, ?, ?)";
 
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, timeMachine.getId());
-            stmt.setString(2, timeMachine.getTimeMachineName());
-            stmt.setInt(3, timeMachine.getCapacity());
-            stmt.setBoolean(4, timeMachine.getStatus());
+            stmt.setString(1, timeMachine.getTimeMachineName());
+            stmt.setInt(2, timeMachine.getCapacity());
+            stmt.setBoolean(3, timeMachine.getStatus());
             stmt.executeUpdate();
 
             ResultSet keys = stmt.getGeneratedKeys();

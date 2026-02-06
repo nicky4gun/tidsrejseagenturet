@@ -15,14 +15,13 @@ public class TimePeriodRepository {
     }
 
     public void addTimePeriod(TimePeriod timePeriod) {
-        String sql = "INSERT INTO time_periods (id, name, description) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO time_periods (name, description) VALUES (?, ?)";
 
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, timePeriod.getId());
-            stmt.setString(2, timePeriod.getTimePeriode());
-            stmt.setString(3, timePeriod.getDescription());
+            stmt.setString(1, timePeriod.getTimePeriod());
+            stmt.setString(2, timePeriod.getDescription());
             stmt.executeUpdate();
 
             ResultSet keys = stmt.getGeneratedKeys();

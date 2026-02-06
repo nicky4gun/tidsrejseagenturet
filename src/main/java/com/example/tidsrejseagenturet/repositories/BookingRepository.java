@@ -15,16 +15,15 @@ public class BookingRepository {
     }
 
     public void addBooking(Booking booking) {
-        String sql = "INSERT INTO bookings (id, customer_id, time_machine_id, time_period_id, guide_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bookings (customer_id, time_machine_id, time_period_id, guide_id) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, booking.getId());
-            stmt.setInt(2, booking.getCustomerId());
-            stmt.setInt(3, booking.getTimeMachineId());
-            stmt.setInt(4, booking.getTimePeriodId());
-            stmt.setInt(5, booking.getGuideId());
+            stmt.setInt(1, booking.getCustomerId());
+            stmt.setInt(2, booking.getTimeMachineId());
+            stmt.setInt(3, booking.getTimePeriodId());
+            stmt.setInt(4, booking.getGuideId());
             stmt.executeUpdate();
 
             ResultSet keys = stmt.getGeneratedKeys();
@@ -66,7 +65,7 @@ public class BookingRepository {
     }
 
     public void updateBooking(int id, int customerId, int timeMachineId, int timePeriodId, int guideId) {
-        String sql = "UPDATE customers SET customer_id = ?, time_machine_id = ?, time_period_id = ?, guide_id = ? WHERE id = ?";
+        String sql = "UPDATE bookings SET customer_id = ?, time_machine_id = ?, time_period_id = ?, guide_id = ? WHERE id = ?";
 
         try (Connection conn = config.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

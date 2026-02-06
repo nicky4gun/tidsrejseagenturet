@@ -2,8 +2,6 @@ package com.example.tidsrejseagenturet.controllers;
 
 import com.example.tidsrejseagenturet.service.TimeMachineService;
 import com.example.tidsrejseagenturet.models.TimeMachine;
-import com.example.tidsrejseagenturet.config.DatabaseConfig;
-import com.example.tidsrejseagenturet.repositories.TimeMachineRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,9 +9,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class TimeMachineController {
-    private final DatabaseConfig config = new DatabaseConfig();
-    private final TimeMachineRepository timeMachineRepo = new TimeMachineRepository(config);
-    private final TimeMachineService service = new TimeMachineService(timeMachineRepo);
+    private TimeMachineService timeMachineService;
+
+    public void setTimeMachineService(TimeMachineService timeMachineService) {
+        this.timeMachineService = timeMachineService;
+        connectTimeMachineList();
+    }
 
     @FXML
     private ListView<TimeMachine> timeMachineList;
@@ -29,12 +30,12 @@ public class TimeMachineController {
     private TimeMachine timeMachineBeingEdited;
 
     public void initialize() {
-        connectTimeMachineList();
+
     }
 
     @FXML
     private void connectTimeMachineList() {
-        timeMachines = FXCollections.observableArrayList(service.getAllTimeMachines());
+        timeMachines = FXCollections.observableArrayList(timeMachineService.getAllTimeMachines());
         timeMachineList.setItems(timeMachines);
     }
 
@@ -43,7 +44,7 @@ public class TimeMachineController {
         int capacity = Integer.parseInt(seatsTimeMachine.getText());
 
         try {
-            TimeMachine timeMachine = service.createTimeMachine(name, capacity);
+            TimeMachine timeMachine = timeMachineService.createTimeMachine(name, capacity);
             timeMachines.add(timeMachine);
 
         } catch (IllegalArgumentException e) {
@@ -57,7 +58,7 @@ public class TimeMachineController {
         try {
             if (selected != null) {
               timeMachines.remove(selected);
-              service.removeTimeMachine(selected);
+              timeMachineService.removeTimeMachine(selected);
             }
 
         } catch (IllegalArgumentException e) {
@@ -81,9 +82,14 @@ public class TimeMachineController {
         }
 
         timeMachineBeingEdited.setTimeMachineName(nameTimeMachine.getText());
-        timeMachineBeingEdited.setCapacity(Integer.parseInt(String.valueOf(seatsTimeMachine.getText())));
 
-        service.updateTimeMachine(timeMachineBeingEdited);
+        try {
+            timeMachineBeingEdited.setCapacity(Integer.parseInt(String.valueOf(seatsTimeMachine.getText())));
+        } catch (NumberFormatException e) {
+            System.out.println("Must be a number, try again");;
+        }
+
+        timeMachineService.updateTimeMachine(timeMachineBeingEdited);
         timeMachineList.refresh();
 
         nameTimeMachine.clear();
